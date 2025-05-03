@@ -1,3 +1,11 @@
-console.log("Welcome to Talent Matcher!");
+import { fetchJobs, fetchMembers } from "./api";
+import { getLLMMatches } from "./llm";
 
-// TODO: Implement talent and job matching logic
+console.log("Welcome to Talent Matcher!");
+(async () => {
+  const members = await fetchMembers();
+  const jobs = await fetchJobs();
+  const results = await getLLMMatches(members, jobs);
+
+  console.dir(results, { depth: null });
+})();
